@@ -1,0 +1,5 @@
+2025-09-19 10:54:06,837 - INFO - 🚀 전체 이관 시작 [DRY RUN]
+2025-09-19 10:54:06,837 - INFO - 🔗 데이터베이스 연결 테스트 시작
+2025-09-19 10:54:06,976 - ERROR - ❌ Source DB 연결 실패: (psycopg2.OperationalError) connection to server at "ep-winter-pond-a6b0v2g0.us-west-2.aws.neon.tech" (35.84.214.33), port 5432 failed: ERROR:  The endpoint has been disabled. Enable it using Neon API and retry.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

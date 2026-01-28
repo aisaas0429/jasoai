@@ -1,0 +1,53 @@
+modules = ["python-3.11", "postgresql-16"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["cargo", "libiconv", "openssl", "postgresql", "rustc"]
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "gunicorn --bind 0.0.0.0:5000 --reuse-port --reload main:app"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 34107
+externalPort = 3002
+
+[[ports]]
+localPort = 35223
+externalPort = 3003
+
+[[ports]]
+localPort = 38039
+externalPort = 3000
+
+[[ports]]
+localPort = 43447
+externalPort = 3001
+
+[agent]
+integrations = ["flask_authentication==1.0.0", "firebase_barebones_flask==1.0.0", "web_scraper==1.0.0"]
